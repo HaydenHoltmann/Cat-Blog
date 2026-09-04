@@ -1,7 +1,6 @@
 using CatBlog.API.Interfaces;
 using CatBlog.API.Models;
 using CatBlog.API.Services;
-using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,15 +26,15 @@ app.UseHttpsRedirection();
 
 //Endpoints -------
 app.MapGet(
-        "/api/MeowrseCode",
+        "/api/Articles",
         () =>
         {
-            MeowrseCode mw = new MeowrseCode();
+            var controller = ArticlesController.GetInstance();
 
-            //return mw.ToMeowrseCode("Hello World");
+            return controller.Articles;
         }
     )
-    .WithName("GetMeowrseCode");
+    .WithName("GetArticles");
 
 app.MapPost(
         "/api/MeowrseCode",
@@ -51,7 +50,7 @@ app.MapPost(
             mw.ToMeowrseCode(newArticle);
         }
     )
-    .WithName("NewBlogPost");
+    .WithName("PostNewBlog");
 
 app.MapGet(
         "/api/HumanCode",
@@ -68,7 +67,7 @@ app.MapGet(
             return mw.ToHumanCode(meows);
         }
     )
-    .WithName("ConvertToHuman");
+    .WithName("GetToHuman");
 
 app.Run();
 

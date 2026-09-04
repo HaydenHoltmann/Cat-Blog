@@ -8,11 +8,36 @@ namespace CatBlog.API.Models;
 //Singleton Class
 public class ArticlesController
 {
+    private static readonly string _articlePath = "../Articles";
+
     private static ArticlesController _controller;
+
     public List<Article> Articles
     {
         //Get From DB Source
-        get { return new List<Article>(); }
+        get
+        {
+            if (!Directory.Exists(_articlePath))
+            {
+                return new List<Article>();
+            }
+
+            List<Article> allArticles = new List<Article>();
+
+            //Get path names from directory
+            var paths = Directory.GetFiles(_articlePath);
+
+            foreach (var path in paths)
+            {
+                var articleJson = File.ReadAllText(path);
+
+                Article newArticle = JsonSerializer.Deserialize<Article>(articleJson);
+
+                allArticles.Add(newArticle);
+            }
+
+            return allArticles;
+        }
     }
 
     private ArticlesController() { }
@@ -32,14 +57,14 @@ public class ArticlesController
     //Adds new article to db
     public bool AddArticle(Article newArticle)
     {
-        if (!Directory.Exists("../Articles"))
+        if (!Directory.Exists(_articlePath))
         {
-            Directory.CreateDirectory("../Articles");
+            Directory.CreateDirectory(_articlePath);
         }
 
         var jsonString = JsonSerializer.Serialize(newArticle);
 
-        File.WriteAllText($"../Articles/{newArticle.Title.Replace(" ", "_")}.json", jsonString);
+        File.WriteAllText($"{_articlePath}/{newArticle.Title.Replace(" ", "_")}.json", jsonString);
 
         return true;
     }
