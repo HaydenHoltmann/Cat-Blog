@@ -1,6 +1,6 @@
-﻿using CatBlog.API.Interfaces;
+﻿using System.Text.RegularExpressions;
+using CatBlog.API.Interfaces;
 using CatBlog.API.Models;
-using CatBlog.API.Morse;
 
 namespace CatBlog.API.Services;
 
@@ -39,25 +39,35 @@ public class MeowrseCode : IMeowrseCode
     public string ToHumanCode(string meows)
     {
         string morse = "";
+        List<string> meowList = meows.Split(" ").ToList<string>();
 
         var keys = Meows.Keys;
 
-        foreach (var meow in meows)
+        foreach (var meow in meowList)
         {
-            foreach (var key in keys)
+            List<string> eachMeow = Regex.Split(meow, $"(?<=[w])").ToList<string>();
+
+            foreach (var letter in eachMeow)
             {
-                if (meow.ToString() == Meows[key])
+                foreach (var key in keys)
                 {
-                    morse += key.ToString();
-                }
-                else
-                {
-                    morse += " ";
+                    if (inputRefactor(letter.ToString()) == Meows[key])
+                    {
+                        morse += key.ToString();
+                    }
                 }
             }
+
+            morse += " ";
         }
 
-        Console.WriteLine($"MeowrseCode ToHumanCode: {morse}");
         return Morse.Morse.ToString(morse);
+    }
+
+    private string inputRefactor(string input)
+    {
+        input.ToLower();
+
+        return input.Replace("m", "M");
     }
 }

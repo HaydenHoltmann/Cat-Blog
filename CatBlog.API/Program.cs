@@ -1,6 +1,7 @@
 using CatBlog.API.Interfaces;
 using CatBlog.API.Models;
 using CatBlog.API.Services;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,8 +59,13 @@ app.MapGet(
         {
             MeowrseCode mw = new MeowrseCode();
 
-            //return mw.ToHumanCode(meows);
-            return "Hello World" + mw.ToHumanCode(meows);
+            if (meows is not "Meow" or "meow" or "Meoow" or "meoow")
+            {
+                //TODO: Return Error
+                //return Results.BadRequest();
+            }
+
+            return mw.ToHumanCode(meows);
         }
     )
     .WithName("ConvertToHuman");
