@@ -22,6 +22,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+//For frontend
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 
 //Endpoints -------
