@@ -20,25 +20,32 @@ function loadArticles() {
 }
 
 function createNewPost() {
+  const titleBox = document.getElementById("title-box");
+  const contentBox = document.getElementById("content-box");
+
+  const currentAuthor = "Cat Catington";
+
+
   fetch("/api/MeowrseCode", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      title: "Test Title",
-      created: "2026-09-03T00:00:00",
-      author: "Test Author",
-      content: "Test Content"
+      title: titleBox.value,
+      created: new Date(),
+      author: `By: ${currentAuthor}`,
+      content: contentBox.value
     })
-  }).then(response => response.json()).then(data => console.log(data));
+  }).then(response => {
+    //Reset input values
+    titleBox.value = "";
+    contentBox.value = "";
 
-  console.log(JSON.stringify({
-    title: "Test Title",
-    created: "2026-09-03T00:00:00",
-    author: "Test Author",
-    content: "Test Content"
-  }));
+    //Reset articles
+    window.location.reload();
+  });
+
 }
 
 function cleanDate(date) {
