@@ -42,12 +42,12 @@ app.MapGet(
 
 app.MapPost(
         "/api/MeowrseCode",
-        (string title, DateTime created, string author, string content, Article newArticle) =>
+        (Article newArticle) =>
         {
-            newArticle.Title = title;
+            /*newArticle.Title = title;
             newArticle.Created = created;
             newArticle.Author = author;
-            newArticle.Content = content;
+            newArticle.Content = content;*/
 
             MeowrseCode mw = new MeowrseCode();
 
@@ -72,6 +72,18 @@ app.MapGet(
         }
     )
     .WithName("GetToHuman");
+
+//Test Endpoints
+app.MapPost(
+        "/api/testPost",
+        (string testValue) =>
+        {
+            Console.WriteLine(testValue);
+            return testValue;
+        }
+    )
+    .DisableAntiforgery()
+    .WithName("TestPost");
 
 app.Run();
 

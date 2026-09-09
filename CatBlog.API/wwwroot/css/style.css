@@ -12,18 +12,24 @@
   }
 
 
-  #text-box{
+  .input-box{
   border: 2px solid;
   border-radius: 1rem;
   height: 8rem;
-  margin: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 0.4rem;
+  }
+
+  #title-box{
+    height: 2rem;
   }
 
   #post-input{
   display: flex;
   flex-direction: column;
   position: sticky;
-  bottom: 2%;
+  bottom: 1.6%;
   
   }
 
@@ -33,7 +39,7 @@
   margin-right: 1rem;
   }
 
-  #post-button{
+  #post-button-div{
   display: flex;
   justify-content: right;
   }
