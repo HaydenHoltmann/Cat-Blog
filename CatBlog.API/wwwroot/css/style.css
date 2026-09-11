@@ -44,3 +44,8 @@
   justify-content: right;
   }
 
+  #footer{
+    display: flex;
+    justify-content: center;
+  }
+
