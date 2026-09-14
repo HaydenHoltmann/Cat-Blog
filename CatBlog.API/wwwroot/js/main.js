@@ -52,8 +52,21 @@ function cleanDate(date) {
   return date.substring(0, date.indexOf("T"));
 }
 
+function toggleProfile() {
+  const profileInfoElement = document.getElementById("profile-info");
+  const profilePictureElement = document.getElementById("profile-picture");
+
+  profileInfoElement.classList.toggle("open");
+  profilePictureElement.classList.toggle("open");
+
+
+}
+
 loadArticles();
 
 const postButton = document.getElementById("post-button");
 postButton.onclick = createNewPost;
+
+const profilePicture = document.getElementById("profile-picture");
+profilePicture.onclick = toggleProfile;
 

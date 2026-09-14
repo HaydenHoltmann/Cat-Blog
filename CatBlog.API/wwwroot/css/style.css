@@ -4,6 +4,43 @@
   background-color: #F8ECC9;
   }
 
+  #header{
+    display: flex;
+    justify-content: end;
+    height: 6.5rem;
+    background-color: grey;
+    padding: 0.5rem;
+  }
+
+  #profile{
+    display: flex;
+    position: absolute;
+  }
+
+  #profile-picture{
+    height: 5rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 1rem;
+  }
+
+  #profile-picture.open{
+    border-radius: 0 1rem 1rem 0;
+  }
+
+  #profile-info{
+    display: none;
+  }
+
+  #profile-info.open{
+    display: inline;
+    background-color: white;
+    padding: 1rem;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 2rem 0 2rem 2rem;
+  }
+
   #articles{
   display: flex;
   flex-direction: column;
@@ -47,5 +84,6 @@
   #footer{
     display: flex;
     justify-content: center;
-  }
+ }
+
 
