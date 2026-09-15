@@ -30,32 +30,48 @@ class ArticleCard extends HTMLElement {
     shadow.innerHTML = `
       <style>
       h1, h5, h6{
-      margin: 0;
-      padding: 0;
+        margin: 0;
+        padding: 0;
       }
 
       .card{
-      display: flex;
-      flex-direction: column;
-      border: 4px solid;
-      border-radius: 1rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      background-color: #EFE6DD;
-      height: 8rem;
+        display: flex;
+        flex-direction: column;
+        border: 4px solid;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-color: #EFE6DD;
+        height: fit-content;
       }
 
       #info{
-      display: flex;
-      justify-content: space-between;
-      margin: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5rem;
       }
 
       #content{
-      /*height: 5rem;*/
-      margin: 0.5rem;
+        height: 3rem;
+        margin: 0.5rem;
+        overflow: hidden;
+      }
+
+      #content.open{
+        height: fit-content;
+      }
+
+      #show-button{
+        background: none;
+        border: none;
+        color: blue;
+      }
+
+      #button-container{
+        display: flex;
+        justify-content: end;
       }
 
       </style>
@@ -71,12 +87,29 @@ class ArticleCard extends HTMLElement {
             <slot></slot>
           </h5>
         </div>
+        <div id="button-container">
+          <button id="show-button">show more \> </button>
+        </div>
       </div>
       `;
+
+    const showButtonElement = this.shadowRoot.getElementById("show-button");
+    const contentElement = this.shadowRoot.getElementById("content");
+
+    showButtonElement.onclick = () => {
+      contentElement.classList.toggle("open");
+    }
+
+    //End of Constructor()
   }
 
 
+
+
+
+  //End of Class
 }
+
 
 
 
