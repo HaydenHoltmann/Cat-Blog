@@ -29,6 +29,8 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 //Endpoints -------
+
+//GET
 app.MapGet(
         "/api/Articles",
         () =>
@@ -39,22 +41,6 @@ app.MapGet(
         }
     )
     .WithName("GetArticles");
-
-app.MapPost(
-        "/api/MeowrseCode",
-        (Article newArticle) =>
-        {
-            /*newArticle.Title = title;
-            newArticle.Created = created;
-            newArticle.Author = author;
-            newArticle.Content = content;*/
-
-            MeowrseCode mw = new MeowrseCode();
-
-            mw.ToMeowrseCode(newArticle);
-        }
-    )
-    .WithName("PostNewBlog");
 
 app.MapGet(
         "/api/HumanCode",
@@ -72,6 +58,46 @@ app.MapGet(
         }
     )
     .WithName("GetToHuman");
+
+app.MapGet(
+        "/api/Profile/Get",
+        () =>
+        {
+            ProfileController controller = ProfileController.GetInstance();
+
+            return controller.Profile;
+        }
+    )
+    .WithName("GetProfile");
+
+//POST
+
+app.MapPost(
+        "/api/MeowrseCode",
+        (Article newArticle) =>
+        {
+            /*newArticle.Title = title;
+            newArticle.Created = created;
+            newArticle.Author = author;
+            newArticle.Content = content;*/
+
+            MeowrseCode mw = new MeowrseCode();
+
+            mw.ToMeowrseCode(newArticle);
+        }
+    )
+    .WithName("PostNewBlog");
+
+app.MapPost(
+        "/api/Profile/Update",
+        (Profile newProfile) =>
+        {
+            ProfileController controller = ProfileController.GetInstance();
+
+            controller.UpdateProfile(newProfile);
+        }
+    )
+    .WithName("PostProfile");
 
 //Test Endpoints
 app.MapPost(

@@ -8,7 +8,9 @@ namespace CatBlog.API.Models;
 //Singleton Class
 public class ArticlesController
 {
-    private static readonly string _articlePath = "../Articles";
+    private static readonly string _articlePath = "../Data/Articles";
+
+    //private static readonly string _articlePath = "../../Data/Articles";
 
     private static ArticlesController _controller;
 

@@ -23,6 +23,7 @@ function createNewPost() {
   const titleBox = document.getElementById("title-box");
   const contentBox = document.getElementById("content-box");
 
+  //TODO: Change this
   const currentAuthor = "Cat Catington";
 
 
@@ -48,6 +49,20 @@ function createNewPost() {
 
 }
 
+function getProfile() {
+  const profileName = document.getElementById("profile-name");
+  const profileAge = document.getElementById("profile-age");
+  const profileBio = document.getElementById("profile-bio");
+
+  fetch("/api/Profile/Get").then(response => response.json()).then(data => {
+    profileName.textContent += data.name;
+    profileAge.textContent += data.age;
+    profileBio.textContent += data.bio;
+
+  }).catch(error => console.log(error));
+
+}
+
 function cleanDate(date) {
   return date.substring(0, date.indexOf("T"));
 }
@@ -58,11 +73,10 @@ function toggleProfile() {
 
   profileInfoElement.classList.toggle("open");
   profilePictureElement.classList.toggle("open");
-
-
 }
 
 loadArticles();
+getProfile();
 
 const postButton = document.getElementById("post-button");
 postButton.onclick = createNewPost;
