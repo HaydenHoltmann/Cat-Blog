@@ -38,7 +38,7 @@ public class ArticlesController
                 allArticles.Add(newArticle);
             }
 
-            return allArticles;
+            return allArticles.OrderBy(article => article.Created).ToList<Article>();
         }
     }
 
